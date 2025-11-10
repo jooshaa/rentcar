@@ -7,7 +7,7 @@ export class CarUnavailablity {
     @PrimaryGeneratedColumn()
     id: number
 
-    @ManyToOne(() => Car, (car) => car.carUnavail)
+    @ManyToOne(() => Car, (car) => car.carUnavail, { onDelete: "CASCADE" })
     @JoinColumn({ name: "car_id" })
     car: Car
 

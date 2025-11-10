@@ -27,7 +27,7 @@ export class CarExpensesService {
       select: {
         car: {
           id: true,
-          number_plate: true
+          number_plate: true,
         }
       }
     })

@@ -2,6 +2,7 @@ import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/commo
 import { RentalsService } from './rentals.service';
 import { CreateRentalDto } from './dto/create-rental.dto';
 import { UpdateRentalDto } from './dto/update-rental.dto';
+import { CreateCarDto } from '../car/dto/create-car.dto';
 
 @Controller('rentals')
 export class RentalsController {
@@ -25,6 +26,11 @@ export class RentalsController {
   @Patch(':id')
   update(@Param('id') id: string, @Body() updateRentalDto: UpdateRentalDto) {
     return this.rentalsService.update(+id, updateRentalDto);
+  }
+
+  @Patch("completed/:id")
+  complete(@Param("id") id: string, ){
+    return this.rentalsService.completed(+id)
   }
 
   @Delete(':id')

@@ -24,8 +24,9 @@ export class Payment {
     @Column({ type: 'decimal', precision: 10, scale: 2 })
     amount: number;
 
-    @Column({ type: 'varchar', length: 10 })
+    @Column({ type: 'varchar', length: 10, nullable: true })
     currency: string;
+    
 
     @Column({
         type: 'enum',
@@ -37,12 +38,14 @@ export class Payment {
     @Column({
         type: 'enum',
         enum: PaymentMethod,
+        nullable: true
     })
     method: PaymentMethod;
 
     @CreateDateColumn({
         type: 'timestamptz',
         default: () => 'CURRENT_TIMESTAMP',
+        nullable: true
     })
     paid_at: Date;
 }

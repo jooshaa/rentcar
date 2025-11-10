@@ -6,8 +6,8 @@ import {
 } from 'typeorm';
 
 export enum AdminRole {
-    MANAGER = 'manager',
-    ADMIN = 'admin',
+    MANAGER = 'admin',
+    ADMIN = 'superadmin',
 }
 
 @Entity('admins')
@@ -33,6 +33,9 @@ export class Admin {
         default: AdminRole.MANAGER,
     })
     role: AdminRole;
+
+    @Column({ type: 'varchar', length: 520, default:null})
+    refresh_token:string
 
     @CreateDateColumn({ type: 'timestamptz', default: () => 'CURRENT_TIMESTAMP' })
     created_at: Date;

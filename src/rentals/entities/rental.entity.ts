@@ -13,11 +13,13 @@ import { Branch } from '../../branches/entities/branch.entity';
 import { Client } from '../../client/entities/client.entity';
 import { Charge } from '../../charges/entities/charge.entity';
 import { Payment } from '../../payments/entities/payment.entity';
+import { Car } from '../../car/entities/car.entity';
 
 export enum RentalStatus {
-    BOOKED = 'booked',
+    PENDING = 'pending',
     CANCELLED = 'cancelled',
     COMPLETED = 'completed',
+    RENTING = 'renting'
 }
 
 @Entity('rentals')
@@ -34,6 +36,10 @@ export class Rental {
     @OneToOne(()=> Client, (client)=> client.rental)
     @JoinColumn({name: "client_id"})
     client: Client
+
+    @ManyToOne(()=>Car, (car)=>car.rental)
+    @JoinColumn({name: "car_id"})
+    cars: Car
 
     @ManyToOne(()=> Branch, (branch)=> branch.rentalPickup)
     @JoinColumn({name: "pickup_branch_id"})
@@ -55,7 +61,7 @@ export class Rental {
     @Column({
         type: 'enum',
         enum: RentalStatus,
-        default: RentalStatus.BOOKED,
+        default: RentalStatus.PENDING,
     })
     status: RentalStatus;
 

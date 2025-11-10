@@ -60,5 +60,5 @@ export class CreateCarDto {
         description: 'Дата, когда автомобиль снова будет доступен (если занят)'
     })
     @IsOptional()
-    next_available_at?: Date;
+    next_available_at?: Date | null;
 }

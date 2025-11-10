@@ -3,6 +3,7 @@ import { Branch } from "../../branches/entities/branch.entity";
 import { CarModel } from "../../car-model/entities/car-model.entity";
 import { CarExpense } from "../../car-expenses/entities/car-expense.entity";
 import { CarUnavailablity } from "../../car_unavailablities/entities/car_unavailablity.entity";
+import { Rental } from "../../rentals/entities/rental.entity";
 
 export enum State {
     BOOKED = "booked",
@@ -45,16 +46,19 @@ export class Car {
     @Column({ type: 'int', default: 1 })
     quantity: number;
 
-    @Column({ type: 'timestamp', nullable: true })
-    next_available_at: Date;
+    @Column({ type: 'timestamptz', nullable: true })
+    next_available_at: Date |null;
 
     @CreateDateColumn({ type: 'timestamp' })
     created_at: Date;
 
-    @OneToMany(() => CarExpense, (carExpenses) => carExpenses.car)
+    @OneToMany(() => CarExpense, (carExpenses) => carExpenses.car,{onDelete: "CASCADE"})
     carExpenses : CarExpense[]
     
-    @OneToMany(()=>CarUnavailablity, (carUnavail)=> carUnavail.car)
+    @OneToMany(()=>CarUnavailablity, (carUnavail)=> carUnavail.car, {onDelete: "CASCADE"})
     carUnavail: CarUnavailablity
+
+    @OneToMany(()=>Rental, (rental)=> rental.cars, {onDelete: "CASCADE"})
+    rental: Rental[]
 
 }

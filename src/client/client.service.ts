@@ -20,6 +20,14 @@ export class ClientService {
     return this.clientRepo.find({})
   }
 
+  async findByActivationLink(link: string) {
+    return this.clientRepo.findOne({ where: { activation_link: link } });
+  }
+
+  async findByEmail(email: string){
+    return await this.clientRepo.findOne({ where: { email } });
+  }
+
   async findOne(id: number) {
     const Client   = await this.clientRepo.findOne({ where: { id } })
             if (!Client ) {

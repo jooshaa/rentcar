@@ -15,6 +15,6 @@ export class Brand {
     @Column({ type: 'varchar', length: 5255, nullable: true })
     logo_url: string;
 
-    @OneToMany(() => CarModel, (carModels) => carModels.brand)
+    @OneToMany(() => CarModel, (carModels) => carModels.brand, { onDelete: "CASCADE" })
     carModels: CarModel[];
 }

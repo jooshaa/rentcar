@@ -27,13 +27,17 @@ export class CarService {
       select: {
         id: true,
         number_plate: true,
-        branch: { name: true },
+        photo: true,
+        state: true,
+        per_day_price: true,
+        next_available_at: true,
+        branch: { name: true, address: true , phone: true},
         carModel: {
           id: true,
           name: true,
           car_type: true,
           seats: true,
-          fuel_type: true
+          fuel_type: true,
         }
       },
 
@@ -47,7 +51,9 @@ export class CarService {
       select: {
         id: true,
         number_plate: true,
-        branch: { name: true },
+        branch: { name: true, address: true, phone: true },
+        per_day_price: true, 
+        next_available_at: true,
         carModel: {
           id: true,
           name: true,

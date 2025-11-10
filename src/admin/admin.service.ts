@@ -21,6 +21,10 @@ export class AdminService {
     return this.adminRepo.find({})
   }
 
+  async findByEmail(email: string) {
+    return await this.adminRepo.findOne({ where: { email } });
+  }
+
   async findOne(id: number) {
     const admin = await this.adminRepo.findOne({ where: { id } })
     if (!admin) {

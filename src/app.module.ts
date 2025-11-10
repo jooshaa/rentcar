@@ -13,6 +13,11 @@ import { ChargesModule } from './charges/charges.module';
 import { PaymentsModule } from './payments/payments.module';
 import { AdminModule } from './admin/admin.module';
 import { OnlineRentModeModule } from './online_rent_mode/online_rent_mode.module';
+import { AuthModule } from './auth/auth.module';
+import { MailModule } from './mail/mail.module';
+import { AuthService } from './auth/auth.service';
+import { APP_GUARD } from '@nestjs/core';
+import { JwtAuthGuard } from './common/guards/jwt-auth.auth';
 
 
 @Module({
@@ -34,8 +39,11 @@ import { OnlineRentModeModule } from './online_rent_mode/online_rent_mode.module
     
     
     
-    ,BrandsModule, CarModelModule, CarExpensesModule, CarModule, BranchesModule, CarUnavailablitiesModule, RentalsModule, ClientModule, ChargesModule, PaymentsModule, AdminModule, OnlineRentModeModule],
+    ,BrandsModule, CarModelModule, CarExpensesModule, CarModule, BranchesModule, CarUnavailablitiesModule, RentalsModule, ClientModule, ChargesModule, PaymentsModule, AdminModule, OnlineRentModeModule, AuthModule, MailModule],
   controllers: [],
-  providers: [],
+  providers: [AuthService, {
+    provide: APP_GUARD,
+    useClass: JwtAuthGuard
+  }],
 })
 export class AppModule {}

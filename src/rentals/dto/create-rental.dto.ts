@@ -11,6 +11,12 @@ export class CreateRentalDto {
     @IsPositive()
     client_id: number;
 
+    @ApiProperty({ example: 5, description: 'ID клиента' })
+    @Type(() => Number)
+    @IsInt()
+    @IsPositive()
+    car_id: number;
+
     @ApiProperty({ example: 2, description: 'ID пункта выдачи (pickup branch)' })
     @Type(() => Number)
     @IsInt()
@@ -32,13 +38,13 @@ export class CreateRentalDto {
     @IsDateString()
     return_datetime: string;
 
-    @ApiProperty({ example: 320.50, description: 'Общая цена (decimal)' })
-    @Type(() => Number)
-    @IsNumber()
-    @Min(0)
-    total_price: number;
+    // @ApiProperty({ example: 320.50, description: 'Общая цена (decimal)' })
+    // @Type(() => Number)
+    // @IsNumber()
+    // @Min(0)
+    // total_price: number;
 
-    @ApiProperty({ example: RentalStatus.BOOKED, enum: RentalStatus, required: false })
+    @ApiProperty({ example: RentalStatus.PENDING, enum: RentalStatus, required: false })
     @IsOptional()
     @IsEnum(RentalStatus)
     status?: RentalStatus;
